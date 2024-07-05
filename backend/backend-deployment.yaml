@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: kovacevicaleksa/nestgraphql-backend:latest
+          ports:
+            - containerPort: 3030
+          env:
+            - name: NODE_ENV
+              value: production
+          resources:
+            limits:
+              cpu: '500m'
+              memory: '128Mi'
+            requests:
+              cpu: '250m'
+              memory: '64Mi'
